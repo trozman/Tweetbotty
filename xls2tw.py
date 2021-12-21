@@ -10,12 +10,11 @@
 #   with tweets while this script is running.
 #   If you interrupt it (ctrl-c) and re-run it, it will start from the last published tweet.
 #
-#
 
 from openpyxl import load_workbook
 from openpyxl.styles.styleable import NumberFormatDescriptor
 
-from colorama import init, deinit # color text
+from colorama import init, deinit, Fore, Back, Style # color text
 from colorama import Fore, Back, Style
 
 import tweepy
@@ -113,10 +112,11 @@ while True:
         try:
             TweetAPI.update_status(TweetText) #tweet
             print("Posting to Twitter OK!")
-        except:
-            print("Posting to Twitter failed!")
+        except Exception as e:
+            print("Posting to Twitter failed! "+str(e))
             exit()
 
+        #todo: handle status 187 (duplicate update) 
 
         #store cursor location to excel     
         ws.cell(RowCursor,1).value="*"   #write cursor to excel
