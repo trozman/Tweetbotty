@@ -112,6 +112,16 @@ while True:
         try:
             TweetAPI.update_status(TweetText) #tweet
             print("Posting to Twitter OK!")
+            
+        except tweepy.HTTPException as e1: #handle twitter error codes
+            print("Error code:"+str(e1.api_codes))
+            print(e1)
+            if e1.api_codes==[187]: #duplicate tweet
+                print("Duplicate tweet, skipping! ")
+                print(e1)
+                time.sleep(6)
+                break
+
         except Exception as e:
             print("Posting to Twitter failed! "+str(e))
             exit()
