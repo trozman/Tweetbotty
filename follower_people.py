@@ -83,10 +83,6 @@ print("Search tweets with keyword ")
 
 #search for tweets
 #for keyword in keywords:
-#    print(Fore.BLUE+"*** Keyword: "+keyword)    
-#    for tweet in TweetAPI.search_tweets(q=keyword, lang="en", count=10):
-#        print(Fore.YELLOW+tweet.user.name+"(@"+tweet.user.screen_name+")"+":"+Fore.WHITE+tweet.text+Fore.CYAN+" at "+str(tweet.created_at))
-#        print("------------------------------")
 
 print("Search tweet accounts with keyword ")
 for keyword in keywords:
@@ -149,11 +145,8 @@ for keyword in keywords:
 
         print("------------------------------")
 
-#the main loop: repeat forewer
-#Every 12 hrs read keywords from excel & follow the users
+#the main loop: repeat until there are keywords in Excel
 
-
-#jump back bc. while  
 print("")
 print(Fore.WHITE+"All done.")
 print(Fore.RED+"Fails:"+str(no_of_fails))
