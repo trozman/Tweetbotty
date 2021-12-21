@@ -177,11 +177,8 @@ for keyword in keywords:
 
         print("------------------------------")
 
-#the main loop: repeat forewer
-#Every 12 hrs read keywords from excel & follow the users
+#the main loop: repeat until keywords
 
-
-#jump back bc. while  
 print("")
 print(Fore.WHITE+"All done.")
 print(Fore.RED+"Fails:"+str(no_of_fails))
