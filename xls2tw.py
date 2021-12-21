@@ -21,6 +21,20 @@ import tweepy
 import datetime
 import time
 
+
+def find_cursor(ws):
+    #Restore the cursor location from excel (Where is the * ?)
+    RowCursor=2 #from the 2nd row on:
+    while not ws.cell(RowCursor,1).value=="*": #repeat until the first column contains text
+        print("Value of A col.:"+str(ws.cell(RowCursor,1).value))
+        print("Cursor not found at "+str(RowCursor)+", increasing.")
+        RowCursor=RowCursor+1
+        if RowCursor==10000: #hard limit: 10 000 tweets. If cursor not found, exit.
+            exit()
+    return RowCursor #return the position of *
+
+
+
 #read twitter keys from the config file (tweerconfig.txt)
 print("Reading config file with twitter keys...")
 def get_pair(line): #transform string line to 2 vars: key & value
@@ -69,19 +83,12 @@ row=tuple
 
 RowCursor=2 #skip the top row
 
-#Restore the cursor location from excel (Where is the * ?)
 wb = load_workbook(filename = XLSfilename)
 ws = wb[Worksheetname] #worksheet name
-while not ws.cell(RowCursor,1).value: #repeat until the first columncontain ins text
-    print("Value of A:"+str(ws.cell(RowCursor,1).value))
-    if ws.cell(RowCursor,1).value=="*":
-        print("Found cursor at "+str(RowCursor))
-        break
-    else:
-        print("Cursor not found at "+str(RowCursor)+", increasing.")
-        RowCursor=RowCursor+1
 
-print("Rowcursor="+str(RowCursor))
+RowCursor=find_cursor(ws) #call function - find * in xls
+        
+print("Rowcursor is at:"+str(RowCursor))
 
 #the main loop: repeat forewer
 #Read tweets from excel until empty row is found then repeat from the start
@@ -113,25 +120,34 @@ while True:
             TweetAPI.update_status(TweetText) #tweet
             print("Posting to Twitter OK!")
             
+            #store cursor location to excel     
+            ws.cell(RowCursor,1).value="*"   #write cursor to excel
+            ws.cell(RowCursor,5).value=tweet_time
+            ws.cell(RowCursor-1,1).value=" "  #delete prev cursor
+
         except tweepy.HTTPException as e1: #handle twitter error codes
             print("Error code:"+str(e1.api_codes))
             print(e1)
             if e1.api_codes==[187]: #duplicate tweet
                 print("Duplicate tweet, skipping! ")
-                print(e1)
+                
+                #store cursor location to excel     
+                print("Cursor is now at " + str(RowCursor))
+                
+                ws.cell(RowCursor,5).value=tweet_time
+                ws.cell(RowCursor,1).value=" "  #delete prev cursor
+
+                
+                ws.cell(RowCursor+1,1).value="*"   #set cursor to next tweet
                 time.sleep(6)
-                break
+                
 
         except Exception as e:
             print("Posting to Twitter failed! "+str(e))
             exit()
+        #else: #if no exceptions
 
-        #todo: handle status 187 (duplicate update) 
-
-        #store cursor location to excel     
-        ws.cell(RowCursor,1).value="*"   #write cursor to excel
-        ws.cell(RowCursor,5).value=tweet_time
-        ws.cell(RowCursor-1,1).value=" "  #delete prev cursor
+        
         
         #save excel file with new cursor location
         for save_attempt in range(10):#retry saving 10 times, wait 10 secs after each retry
@@ -152,7 +168,8 @@ while True:
         
        
         time.sleep(12*60*60) #sleep for 12 hrs - does not work if computer goes to standby - ensure it's always on
-           
+        #time.sleep(5) #uncomment for testing purposes, if you want quicker turnaround
+
         now=datetime.datetime.now()
         print("Slept for "+str((now-tweet_time)/60)+" mins.")
 
