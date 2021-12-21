@@ -10,5 +10,5 @@ Twitter bots written in Python.
 How to use:
 1. insert your secret keys to tweetconfig.txt (get them from Twitter Developer account)
 2. insert your keywords and tweets into the Excel file: Tweets.xlsx
-3. Run python <name of the bot>
+3. Run python  + name of the bot
 
