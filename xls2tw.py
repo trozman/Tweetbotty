@@ -9,6 +9,8 @@
 #   spreadsheet(no more tweets), it will start from the beginning. You can add rows 
 #   with tweets while this script is running.
 #   If you interrupt it (ctrl-c) and re-run it, it will start from the last published tweet.
+#
+#
 
 from openpyxl import load_workbook
 from openpyxl.styles.styleable import NumberFormatDescriptor
