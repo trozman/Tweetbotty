@@ -48,6 +48,7 @@ If you interrupt it (ctrl-c) and re-run it, it will start from the last publishe
 ### Installation follower_people.py (Follower bot - people search)
 
 The same as previous. Changes:
+
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
 Step 7: Run it:
     ```bash
@@ -57,6 +58,7 @@ Step 7: Run it:
 ### Installation follower_tw_slow.py (Follower bot - tweet search)
 
 The same as previous. Changes:
+
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
 Step 7: Run it:
     ```bash
