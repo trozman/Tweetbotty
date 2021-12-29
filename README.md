@@ -36,7 +36,7 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column
 7. Run it:
     ```bash
-    python follower_tw_slow.py
+    python xls2tw.py
     ```
     
 7.  This tweetbot will run forewer: it will read tweets in sequence from excel tile, 
@@ -49,8 +49,16 @@ If you interrupt it (ctrl-c) and re-run it, it will start from the last publishe
 
 The same as previous. Changes:
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
+Step 7: Run it:
+    ```bash
+    python follower_people.py
+    ```
 
 ### Installation follower_tw_slow.py (Follower bot - tweet search)
 
 The same as previous. Changes:
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
+Step 7: Run it:
+    ```bash
+    python follower_tw_slow.py
+    ```
