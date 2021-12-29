@@ -7,11 +7,6 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 
 **follower_tw_slow.py:** auto following people (twitter search tweets) based on keywords defined in Excel
 
-How to use
-1. insert your secret keys to tweetconfig.txt (get them from Twitter Developer account)
-2. insert your keywords and tweets into the Excel file: Tweets.xlsx
-3. Run python  + the name of the bot
-
 ## :wrench: Dependencies and Installation
 
 ### Installation xls2tw.py (Twitter bot)
