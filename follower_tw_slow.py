@@ -75,7 +75,9 @@ row=tuple
 
 #helper vars and counters
 no_of_new_follows=0
+no_of_new_per_kw=0
 no_of_fails=0
+no_of_fails_per_kw=0
 
 keywords=ws.cell(2,2).value.split(",") #take from 'Used keywords' cell
 print("Keywords from excel:",str(keywords))
@@ -92,13 +94,14 @@ print("Search tweet accounts with keyword ")
 for keyword in keywords:
     print(Fore.BLUE+"*** Keyword: "+keyword)    
     for tweets in TweetAPI.search_tweets(q=keyword, count=100):
+        print(Fore.BLUE+"*** Keyword: "+keyword) 
         print(Fore.WHITE+"Tweet text:"+tweets.text)
         #print("Tweet author:"+str(tweets.user))
         tweet_user=tweets.user
         print("Author screen name:"+tweet_user.screen_name)
         
         print(Fore.WHITE+"Trying to follow @"+tweet_user.screen_name+" ("+tweet_user.name+")")
-        
+        print("At: "+str(datetime.datetime.now()))
         for attempt in range(3): #retry if hit limit
             try:
                 friendship=TweetAPI.get_friendship(source_screen_name="BICERO_Ltd",target_screen_name=tweet_user.screen_name)
@@ -153,6 +156,14 @@ for keyword in keywords:
                         no_of_fails+=1
                         time.sleep(6)
                         break
+
+                    if e.api_codes==[50]: #user does not want you to follow it
+                        print(Fore.RED+"User not found, she dissapeared!")
+                        print(e)
+                        no_of_fails+=1
+                        time.sleep(6)
+                        break
+                    
                 except Exception as e1:
                     print("Unknow exception, waiting for 1 min! "+str(datetime.datetime.now()))
                     print(e1)
@@ -176,11 +187,20 @@ for keyword in keywords:
             no_of_fails+=1
 
         print("------------------------------")
+    
+    print(Fore.WHITE+keyword+" keyword done at "+ str(datetime.datetime.now()))
+    print(Fore.RED+"Fails per keyword:"+str(no_of_fails_per_kw))
+    print(Fore.GREEN+"New follows per keyword:"+str(no_of_new_per_kw))  
+
+    #reset follows and fails per kw
+    no_of_fails_per_kw=0
+    no_of_new_per_kw=0
+    # for keyword loop end
 
 #the main loop: repeat until keywords
 
 print("")
-print(Fore.WHITE+"All done.")
-print(Fore.RED+"Fails:"+str(no_of_fails))
-print(Fore.GREEN+"New follows:"+str(no_of_new_follows))  
+print(Fore.WHITE+"All done at "+ str(datetime.datetime.now()))
+print(Fore.RED+"Total Fails:"+str(no_of_fails))
+print(Fore.GREEN+"Total New follows:"+str(no_of_new_follows))  
 deinit() #stop coloured output
