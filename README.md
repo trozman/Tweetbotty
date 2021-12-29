@@ -30,7 +30,7 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
     pip install tweepy
     ```
 
-3. Create project, development app and obtain Twitter keys (from your twitter development account) at https://developer.twitter.com/en/portal/dashboard
+3. Create a project, development app and obtain Twitter keys (from your twitter development account) at https://developer.twitter.com/en/portal/dashboard
 4. Upgrade your Twitter developer account to the 'Elevated' account (free)
 5. Put your twitter keys to 'tweetconfig.txt'  
 6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column
