@@ -1,5 +1,5 @@
 # Tweetbotty
-Twitter bots written in Python which uses Excel file as a source for tweets.
+Twitter bots written in Python which use Excel file as a source for tweets/search keywords.
 
 **xls2tw.py:** endless posting of tweets from Excel spreadsheet to Twitter
 
