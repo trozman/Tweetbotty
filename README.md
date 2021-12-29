@@ -49,3 +49,13 @@ publish it to Twitter, pausing for X hours. If it finds the empty row in the
 spreadsheet(no more tweets), it will start from the beginning. You can add rows 
 with tweets while this script is running.
 If you interrupt it (ctrl-c) and re-run it, it will start from the last published tweet.
+
+### Installation follower_people.py (Follower bot - people search)
+
+The same as previous. Changes:
+Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
+
+### Installation follower_tw_slow.py (Follower bot - tweet search)
+
+The same as previous. Changes:
+Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
