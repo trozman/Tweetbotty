@@ -24,7 +24,7 @@ How to use
     ```
 2. Install dependent packages
 
-  ```bash
+    ```bash
     # Install Openpyxl - Excel library
     pip install openpyxl
 
@@ -39,9 +39,8 @@ How to use
 4. Upgrade your Twitter developer account to the 'Elevated' account (free)
 5. Put your twitter keys to 'tweetconfig.txt'  
 6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column
-
 7. Run it:
- ```bash
+    ```bash
     python follower_tw_slow.py
     ```
     
