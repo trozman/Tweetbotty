@@ -5,7 +5,7 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 
 **follower_people.py:** auto following people (twitter search people) based on keywords defined in Excel
 
-**follower_tw_slow.py:** auto following people (twitter search tweets) based on keywords defined in Excel
+**follower_tw_slow.py:** auto following people (twitter search tweets) based on keywords defined in Excel, 288 per day, avoiding Twitter limits
 
 ## :wrench: Dependencies and Installation
 
