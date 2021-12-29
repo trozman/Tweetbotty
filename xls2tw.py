@@ -81,7 +81,7 @@ TweetText=str
 NumberOfTweetsinXLS=0
 row=tuple
 
-RowCursor=2 #skip the top row
+RowCursor=2 #skip the top row in Excel (header)
 
 wb = load_workbook(filename = XLSfilename)
 ws = wb[Worksheetname] #worksheet name
