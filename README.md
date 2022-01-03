@@ -52,6 +52,7 @@ If you interrupt it (ctrl-c) and re-run it, it will start from the last publishe
 The same as previous. Changes:
 
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
+
 Step 7: Run it:
     ```bash
     python follower_people.py
@@ -62,6 +63,7 @@ Step 7: Run it:
 The same as previous. Changes:
 
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
+
 Step 7: Run it:
     ```bash
     python follower_tw_slow.py
@@ -72,6 +74,7 @@ Step 7: Run it:
 The same as previous. Changes:
 
 Step 6: Define filters, modify variables filter_followers and filter_tweets
+
 Step 7: Run it:
     ```bash
     python unfollower.py
