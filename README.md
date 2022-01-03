@@ -54,6 +54,7 @@ The same as previous. Changes:
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
 
 Step 7: Run it:
+
     ```bash
     python follower_people.py
     ```
@@ -65,6 +66,7 @@ The same as previous. Changes:
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
 
 Step 7: Run it:
+
     ```bash
     python follower_tw_slow.py
     ```
@@ -76,6 +78,7 @@ The same as previous. Changes:
 Step 6: Define filters, modify variables filter_followers and filter_tweets
 
 Step 7: Run it:
+
     ```bash
     python unfollower.py
     ```
