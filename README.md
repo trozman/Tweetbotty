@@ -5,12 +5,7 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 
 **follower_people.py:** auto following people (twitter search people) based on keywords defined in Excel
 
-**follower_tw_slow.py:** auto following people (twitter search tweets) based on keywords defined in Excel
-
-How to use
-1. insert your secret keys to tweetconfig.txt (get them from Twitter Developer account)
-2. insert your keywords and tweets into the Excel file: Tweets.xlsx
-3. Run python  + the name of the bot
+**follower_tw_slow.py:** auto following people (twitter search tweets) based on keywords defined in Excel, 288 per day, avoiding Twitter limits
 
 ## :wrench: Dependencies and Installation
 
@@ -35,13 +30,13 @@ How to use
     pip install tweepy
     ```
 
-3. Create project, development app and obtain Twitter keys (from your twitter development account) at https://developer.twitter.com/en/portal/dashboard
+3. Create a project, development app and obtain Twitter keys (from your twitter development account) at https://developer.twitter.com/en/portal/dashboard
 4. Upgrade your Twitter developer account to the 'Elevated' account (free)
 5. Put your twitter keys to 'tweetconfig.txt'  
 6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column
 7. Run it:
     ```bash
-    python follower_tw_slow.py
+    python xls2tw.py
     ```
     
 7.  This tweetbot will run forewer: it will read tweets in sequence from excel tile, 
@@ -53,9 +48,19 @@ If you interrupt it (ctrl-c) and re-run it, it will start from the last publishe
 ### Installation follower_people.py (Follower bot - people search)
 
 The same as previous. Changes:
+
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
+Step 7: Run it:
+    ```bash
+    python follower_people.py
+    ```
 
 ### Installation follower_tw_slow.py (Follower bot - tweet search)
 
 The same as previous. Changes:
+
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
+Step 7: Run it:
+    ```bash
+    python follower_tw_slow.py
+    ```
