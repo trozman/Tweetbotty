@@ -55,9 +55,9 @@ Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', workshe
 
 Step 7: Run it:
 
-    ```bash
-    python follower_people.py
-    ```
+```bash
+python follower_people.py
+```
 
 ### Installation follower_tw_slow.py (Follower bot - tweet search)
 
@@ -67,9 +67,9 @@ Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', workshe
 
 Step 7: Run it:
 
-    ```bash
-    python follower_tw_slow.py
-    ```
+```bash
+python follower_tw_slow.py
+```
 
 ### Installation unfollower.py (Un-Follower bot, get rid of people with too little followers or tweets)
 
@@ -79,6 +79,6 @@ Step 6: Define filters, modify variables filter_followers and filter_tweets
 
 Step 7: Run it:
 
-    ```bash
-    python unfollower.py
-    ```
+```bash
+python unfollower.py
+```
