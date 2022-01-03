@@ -22,8 +22,7 @@ def get_pair(line): #transform string line to 2 vars: key & value
 
 with open("tweetconfig.txt") as config_file:    
     config_keys = dict(get_pair(line) for line in config_file) #read line from the file, convert it to key,value and insert it into dict
-
-print("Done.")
+print("Done reading config.")
 
 logging.basicConfig(filename='unfollower.log', encoding='utf-8', level=logging.DEBUG)
 
