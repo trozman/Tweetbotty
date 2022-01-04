@@ -13,7 +13,7 @@ The project is very fresh, made with 'a duct tape and a chewing gum', so use it 
 ## :wrench: Dependencies and Installation
 Requires: Python 3.9! (logging library)
 
-### Installation xls2tw.py (Twitter bot)
+### Installation xls2tw.py (A bot that tweets)
 
 1. Clone repo (or just download the files)
 
