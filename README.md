@@ -15,7 +15,7 @@ Requires: Python 3.9! (logging library)
 
 ### Installation xls2tw.py (Twitter bot)
 
-1. Clone repo
+1. Clone repo (or just download the files)
 
     ```bash
     git clone https://github.com/trozman/Tweetbotty.git
