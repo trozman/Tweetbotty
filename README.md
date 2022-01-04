@@ -10,6 +10,7 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 **unfollower.py:** unfollow people with too little tweets or followers
 
 ## :wrench: Dependencies and Installation
+Requires: Python 3.9! (logging library)
 
 ### Installation xls2tw.py (Twitter bot)
 
