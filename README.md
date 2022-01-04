@@ -7,6 +7,8 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 
 **follower_tw_slow.py:** auto following people (twitter search tweets) based on keywords defined in Excel, 288 per day, avoiding Twitter limits
 
+**unfollower.py:** unfollow people with too little tweets or followers
+
 ## :wrench: Dependencies and Installation
 
 ### Installation xls2tw.py (Twitter bot)
@@ -39,7 +41,7 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
     python xls2tw.py
     ```
     
-7.  This tweetbot will run forewer: it will read tweets in sequence from excel tile, 
+8.  This tweetbot will run forewer: it will read tweets in sequence from excel tile, 
 publish it to Twitter, pausing for X hours. If it finds the empty row in the 
 spreadsheet(no more tweets), it will start from the beginning. You can add rows 
 with tweets while this script is running.
@@ -50,17 +52,33 @@ If you interrupt it (ctrl-c) and re-run it, it will start from the last publishe
 The same as previous. Changes:
 
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell A:2
+
 Step 7: Run it:
-    ```bash
-    python follower_people.py
-    ```
+
+```bash
+python follower_people.py
+```
 
 ### Installation follower_tw_slow.py (Follower bot - tweet search)
 
 The same as previous. Changes:
 
 Step 6: Put comma separated keywords for people search in 'Tweets.xlsx', worksheet 'Keywords', cell B:2
+
 Step 7: Run it:
-    ```bash
-    python follower_tw_slow.py
-    ```
+
+```bash
+python follower_tw_slow.py
+```
+
+### Installation unfollower.py (Un-Follower bot, get rid of people with too little followers or tweets)
+
+The same as previous. Changes:
+
+Step 6: Define filters, modify variables filter_followers and filter_tweets
+
+Step 7: Run it:
+
+```bash
+python unfollower.py
+```
