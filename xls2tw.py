@@ -20,6 +20,7 @@ from colorama import Fore, Back, Style
 import tweepy
 import datetime
 import time
+import logging
 
 
 def find_cursor(ws):
@@ -46,6 +47,8 @@ with open("tweetconfig.txt") as config_file:
 
 print("Done.")
 
+#configure logging - requires Python 3.9!
+logging.basicConfig(filename='xls2tw.log', encoding='utf-8', level=logging.DEBUG)
 
 # Your app's API/consumer key and secret can be found under the Consumer Keys
 # section of the Keys and Tokens tab of your app, under the
@@ -74,6 +77,7 @@ XLSfilename="Tweets.xlsx"
 Worksheetname="Tweets"
 
 print("Opening "+XLSfilename+" and searching for cursor (last twitted row)...")
+ 
 wb = load_workbook(filename = XLSfilename)
 ws = wb[Worksheetname] #worksheet name
 
@@ -93,7 +97,7 @@ print("Rowcursor is at:"+str(RowCursor))
 #the main loop: repeat forewer
 #Read tweets from excel until empty row is found then repeat from the start
 while True:
-    print("Authenticating to twitter again...")
+    print("Authenticating to twitter(again)...")
     # Authenticate Twitter
     try:
         TweetAPI = tweepy.API(auth)
@@ -102,8 +106,11 @@ while True:
         # screen name / username of the account
         print("Twitter username:"+TweetAPI.verify_credentials().screen_name)
         print("Auth. successfull!")
-    except:
-        print("Auth. was not successfull!")
+        logging.info("Auth. successfull"+" at:"+str(datetime.datetime.now()))
+    except Exception as auth_e:
+        print("Auth. was NOT successfull!")
+        logging.info("Auth. was NOT successfull"+" at:"+str(datetime.datetime.now()))
+        print(str(auth_e))
         exit()
     #end try auth
     
@@ -119,7 +126,7 @@ while True:
         try:
             TweetAPI.update_status(TweetText) #tweet
             print("Posting to Twitter OK!")
-            
+            logging.info("Posting to TW ok"+" at:"+str(datetime.datetime.now()))
             #store cursor location to excel     
             ws.cell(RowCursor,1).value="*"   #write cursor to excel
             ws.cell(RowCursor,5).value=tweet_time
@@ -130,7 +137,7 @@ while True:
             print(e1)
             if e1.api_codes==[187]: #duplicate tweet
                 print("Duplicate tweet, skipping! ")
-                
+                logging.info("Duplicate tweet, skipping"+" at:"+str(datetime.datetime.now()))
                 #store cursor location to excel     
                 print("Cursor is now at " + str(RowCursor))
                 
@@ -144,6 +151,7 @@ while True:
 
         except Exception as e:
             print("Posting to Twitter failed! "+str(e))
+            logging.info("Posting to TW failed"+" at:"+str(datetime.datetime.now()))
             exit()
         #else: #if no exceptions
 
@@ -155,17 +163,22 @@ while True:
                 wb.save(filename=XLSfilename) #save updated excel file (with cursor and post time) 
             except:
                 print("Error occured while saving excel file, retrying in 10 secs... "+str(save_attempt)+"/10")
+                logging.info("Error occured while saving excel file, retrying in 10 secs..."+" at:"+str(datetime.datetime.now()))
                 time.sleep(10) 
             else:
                 print("Saving excel & new cursor successfully, continuing...")
+                logging.info("Saving excel & new cursor successfully, continuing..."+" at:"+str(datetime.datetime.now()))
                 break
         else:
             #we failed all attempts to save, exiting
             print("All attempts saving excel failed, exiting...")
+            logging.info("All attempts saving excel failed, exiting..."+" at:"+str(datetime.datetime.now()))
+                
             exit()
 
         print("Waiting for 12 hours until next tweet...")  
-        
+        logging.info("Waiting for 12 hours until next tweet..."+" at:"+str(datetime.datetime.now()))
+             
        
         time.sleep(12*60*60) #sleep for 12 hrs - does not work if computer goes to standby - ensure it's always on
         #time.sleep(5) #uncomment for testing purposes, if you want quicker turnaround
@@ -191,16 +204,24 @@ while True:
             wb.save(filename=XLSfilename) #save updated excel file (with cursor and post time) 
         except:
             print("Error occured while saving excel file, retrying in 10 secs... "+str(save_attempt)+"/10")
+            logging.info("Error occured while saving excel file, retrying in 10 secs..."+" at:"+str(datetime.datetime.now()))
+         
             time.sleep(10) 
         else:
             print("Saving excel & new cursor successfully, continuing...")
+            logging.info("Saving excel & new cursor successfully, continuing..."+" at:"+str(datetime.datetime.now()))
+         
             break
     else:
          #we failed all attempts to save, exiting
         print("All attempts saving excel failed, exiting...")
+        logging.info("All attempts saving excel failed, exiting..."+" at:"+str(datetime.datetime.now()))
+         
         exit()
 
     RowCursor=2 #reset row cursor, because we run out of tweets, therefore we'll begin at the 2nd row
     print("*****Out of tweets, starting again from the beginning...")
+    logging.info("*****Out of tweets, starting again from the beginning..."+" at:"+str(datetime.datetime.now()))
+         
     #jump back bc. while    
     deinit() #stop coloured output
