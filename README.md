@@ -18,7 +18,7 @@ See 3 bots in action:
 **unfollower.py:** unfollow people with too little tweets or followers
 
 ## :wrench: Dependencies and Installation
-Requires: Python 3.9! (logging library)
+Requires: Python 3.9! (works also with 3.x, but the logging library requires 3.9)
 
 ### Installation xls2tw.py (A bot that tweets)
 
