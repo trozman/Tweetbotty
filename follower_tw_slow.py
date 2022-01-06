@@ -124,8 +124,18 @@ for keyword in keywords:
             print("BICERO_Ltd"+" is not following "+tweet_user.screen_name)
             for follow_attempt in range(3):#retry following 3 times, wait after each retry
                 try:
+                    print("User posted so many tweets:"+str(tweet_user.statuses_count))
+                    if tweet_user.statuses_count<100:
+                        print("Too little tweets, skipping...")
+                        break
+
+                    print("User has so many followers:"+str(tweet_user.followers_count))
+                    if tweet_user.followers_count<50:
+                        print("Too little followers, skipping...")
+                        break
+                    #else:
                     TweetAPI.create_friendship(user_id=tweet_user.id)
-                    print(Fore.GREEN+"Waiting for 5 mins ...")
+                    print(Fore.GREEN+"Created a new follow, waiting for 5 mins ...")
                     time.sleep(5*60) #avoid block: wait for 5 mins = 12 follows per hour = 288 per day
                     
                 except tweepy.HTTPException as e:
