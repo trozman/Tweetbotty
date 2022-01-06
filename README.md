@@ -19,6 +19,7 @@ See 3 bots in action:
 
 ## :wrench: Dependencies and Installation
 Requires: Python 3.9! (works also with 3.x, but the logging library requires 3.9)
+
 Ubuntu, Mint and similar:
 ```bash
 sudo apt install python3.9
