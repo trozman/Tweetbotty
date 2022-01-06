@@ -76,7 +76,7 @@ init() #init colorama for coloured text
 XLSfilename="Tweets.xlsx"
 Worksheetname="Tweets"
 
-print("Opening "+XLSfilename+" and searching for cursor (last twitted row)...")
+print(Fore.WHITE+"Opening "+XLSfilename+" and searching for cursor (last twitted row)...")
  
 wb = load_workbook(filename = XLSfilename)
 ws = wb[Worksheetname] #worksheet name
@@ -92,23 +92,23 @@ ws = wb[Worksheetname] #worksheet name
 
 RowCursor=find_cursor(ws) #call function - find * in xls
         
-print("Rowcursor is at:"+str(RowCursor))
+print(Fore.WHITE+"Rowcursor is at:"+str(RowCursor))
 
 #the main loop: repeat forewer
 #Read tweets from excel until empty row is found then repeat from the start
 while True:
-    print("Authenticating to twitter(again)...")
+    print(Fore.WHITE+"Authenticating to twitter(again)...")
     # Authenticate Twitter
     try:
         TweetAPI = tweepy.API(auth)
     
         # If the authentication was successful, this should print the
         # screen name / username of the account
-        print("Twitter username:"+TweetAPI.verify_credentials().screen_name)
-        print("Auth. successfull!")
+        print(Fore.WHITE+"Twitter username:"+TweetAPI.verify_credentials().screen_name)
+        print(Fore.WHITE+"Auth. successfull!")
         logging.info("Auth. successfull"+" at:"+str(datetime.datetime.now()))
     except Exception as auth_e:
-        print("Auth. was NOT successfull!")
+        print(Fore.RED+"Auth. was NOT successfull!")
         logging.info("Auth. was NOT successfull"+" at:"+str(datetime.datetime.now()))
         print(str(auth_e))
         exit()
@@ -122,10 +122,10 @@ while True:
     while ws.cell(RowCursor,2).value: #repeat until the cell (column 2) contains text
         TweetText=str(ws.cell(RowCursor,2).value) # get tweet text from the spreadsheet
         tweet_time=datetime.datetime.now()
-        print("Tweeting #"+str(RowCursor)+":"+TweetText+" /at "+str(tweet_time))
+        print(Fore.BLUE+"Tweeting #"+str(RowCursor)+":"+Fore.WHITE+TweetText+" /at "+str(tweet_time)+Fore.WHITE)
         try:
             TweetAPI.update_status(TweetText) #tweet
-            print("Posting to Twitter OK!")
+            print(Fore.GREEN+"Posting to Twitter OK!"+" at:"+str(datetime.datetime.now())+Fore.WHITE)
             logging.info("Posting to TW ok"+" at:"+str(datetime.datetime.now()))
             #store cursor location to excel     
             ws.cell(RowCursor,1).value="*"   #write cursor to excel
@@ -133,13 +133,13 @@ while True:
             ws.cell(RowCursor-1,1).value=" "  #delete prev cursor
 
         except tweepy.HTTPException as e1: #handle twitter error codes
-            print("Error code:"+str(e1.api_codes))
+            print(Fore.RED+"Error code:"+str(e1.api_codes))
             print(e1)
             if e1.api_codes==[187]: #duplicate tweet
-                print("Duplicate tweet, skipping! ")
+                print(Fore.RED+"Duplicate tweet, skipping! ")
                 logging.info("Duplicate tweet, skipping"+" at:"+str(datetime.datetime.now()))
                 #store cursor location to excel     
-                print("Cursor is now at " + str(RowCursor))
+                print(Fore.WHITE+"Cursor is now at " + str(RowCursor))
                 
                 ws.cell(RowCursor,5).value=tweet_time
                 ws.cell(RowCursor,1).value=" "  #delete prev cursor
@@ -150,7 +150,7 @@ while True:
                 
 
         except Exception as e:
-            print("Posting to Twitter failed! "+str(e))
+            print(Fore.RED+"Posting to Twitter failed! "+str(e))
             logging.info("Posting to TW failed"+" at:"+str(datetime.datetime.now()))
             exit()
         #else: #if no exceptions
@@ -162,21 +162,21 @@ while True:
             try:
                 wb.save(filename=XLSfilename) #save updated excel file (with cursor and post time) 
             except:
-                print("Error occured while saving excel file, retrying in 10 secs... "+str(save_attempt)+"/10")
+                print(Fore.RED+"Error occured while saving excel file, retrying in 10 secs... "+str(save_attempt)+"/10")
                 logging.info("Error occured while saving excel file, retrying in 10 secs..."+" at:"+str(datetime.datetime.now()))
                 time.sleep(10) 
             else:
-                print("Saving excel & new cursor successfully, continuing...")
+                print(Fore.GREEN+"Saving excel & new cursor successfully, continuing...")
                 logging.info("Saving excel & new cursor successfully, continuing..."+" at:"+str(datetime.datetime.now()))
                 break
         else:
             #we failed all attempts to save, exiting
-            print("All attempts saving excel failed, exiting...")
+            print(Fore.RED+"All attempts saving excel failed, exiting...")
             logging.info("All attempts saving excel failed, exiting..."+" at:"+str(datetime.datetime.now()))
                 
             exit()
 
-        print("Waiting for 12 hours until next tweet...")  
+        print(Fore.WHITE+"Waiting for 12 hours until next tweet...")  
         logging.info("Waiting for 12 hours until next tweet..."+" at:"+str(datetime.datetime.now()))
              
        
@@ -184,7 +184,8 @@ while True:
         #time.sleep(5) #uncomment for testing purposes, if you want quicker turnaround
 
         now=datetime.datetime.now()
-        print("Slept for "+str((now-tweet_time)/60)+" mins.")
+        print(Fore.WHITE+"Slept for "+str((now-tweet_time)/60)+" mins.")
+        print("-------------------------------------")
 
         RowCursor=RowCursor+1
 
@@ -208,19 +209,19 @@ while True:
          
             time.sleep(10) 
         else:
-            print("Saving excel & new cursor successfully, continuing...")
+            print(Fore.GREEN+"Saving excel & new cursor successfully, continuing...")
             logging.info("Saving excel & new cursor successfully, continuing..."+" at:"+str(datetime.datetime.now()))
          
             break
     else:
          #we failed all attempts to save, exiting
-        print("All attempts saving excel failed, exiting...")
+        print(Fore.RED+"All attempts saving excel failed, exiting...")
         logging.info("All attempts saving excel failed, exiting..."+" at:"+str(datetime.datetime.now()))
          
         exit()
 
     RowCursor=2 #reset row cursor, because we run out of tweets, therefore we'll begin at the 2nd row
-    print("*****Out of tweets, starting again from the beginning...")
+    print(Fore.BLUE+"*****Out of tweets, starting again from the beginning..."+Fore.WHITE)
     logging.info("*****Out of tweets, starting again from the beginning..."+" at:"+str(datetime.datetime.now()))
          
     #jump back bc. while    
