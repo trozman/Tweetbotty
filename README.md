@@ -1,5 +1,13 @@
 # Tweetbotty
-Twitter bots written in Python which use Excel file as a source for tweets/search keywords.
+Twitter bots written in Python which use Excel file as a source for tweets/search keywords. I wrote them because I'm too lazy to regularly post to Twitter and follow people. Bots try to avoid Twitter limits and in most cases they succeed.
+The project is very fresh, made with 'a duct tape and a chewing gum', so use it at your own risk and most certainly, do not use it as a good programming practice.
+See 3 bots in action: 
+- Upper left - an unfollower bot (unfollows people with tweets&followers<threshold, 
+- bottom left - a follower bot, 
+- bottom right- a bot that posts tweets:
+
+<img width="787" alt="Tweetbotty" src="https://user-images.githubusercontent.com/26304983/148203875-801bc59f-3438-4e49-b2eb-8750c1d6e468.png">
+
 
 **xls2tw.py:** endless posting of tweets from Excel spreadsheet to Twitter
 
@@ -10,10 +18,11 @@ Twitter bots written in Python which use Excel file as a source for tweets/searc
 **unfollower.py:** unfollow people with too little tweets or followers
 
 ## :wrench: Dependencies and Installation
+Requires: Python 3.9! (works also with 3.x, but the logging library requires 3.9)
 
-### Installation xls2tw.py (Twitter bot)
+### Installation xls2tw.py (A bot that tweets)
 
-1. Clone repo
+1. Clone repo (or just download the files)
 
     ```bash
     git clone https://github.com/trozman/Tweetbotty.git
