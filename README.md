@@ -20,7 +20,7 @@ See 3 bots in action:
 ## :wrench: Dependencies and Installation
 Requires: Python 3.9! (works also with 3.x, but the logging library requires 3.9)
 
-### Installation xls2tw.py (A bot that tweets)
+### Installation: xls2tw.py (A bot that tweets)
 
 1. Clone repo (or just download the files)
 
@@ -56,7 +56,7 @@ spreadsheet(no more tweets), it will start from the beginning. You can add rows
 with tweets while this script is running.
 If you interrupt it (ctrl-c) and re-run it, it will start from the last published tweet.
 
-### Installation follower_people.py (Follower bot - people search)
+### Installation: follower_people.py (Follower bot - people search)
 
 The same as previous. Changes:
 
@@ -68,7 +68,7 @@ Step 7: Run it:
 python follower_people.py
 ```
 
-### Installation follower_tw_slow.py (Follower bot - tweet search)
+### Installation: follower_tw_slow.py (Follower bot - tweet search)
 
 The same as previous. Changes:
 
@@ -80,7 +80,7 @@ Step 7: Run it:
 python follower_tw_slow.py
 ```
 
-### Installation unfollower.py (Un-Follower bot, get rid of people with too little followers or tweets)
+### Installation: unfollower.py (Un-Follower bot, get rid of people with too little followers or tweets)
 
 The same as previous. Changes:
 
