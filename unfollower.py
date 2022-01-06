@@ -67,8 +67,8 @@ init() #init colorama for coloured text
 no_of_unfollows=0
 
 #filter for unfollow:
-filter_followers=35
-filter_tweets=150
+filter_followers=70
+filter_tweets=300
 
 print("Getting friend list ...")
 friends=[]
@@ -88,7 +88,7 @@ except Exception as e:
         print(e)
         exit
 print("Iterating through friend list...")
-for attempt in range(10): #retry if hit limit
+for attempt in range(100): #retry if hit limit
     try:
 
         for f in friends:
@@ -109,7 +109,9 @@ for attempt in range(10): #retry if hit limit
 
             else:
                 print(Fore.WHITE)
-            print(str(friendcount)+" "+ f.screen_name+" "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count))
+            print(str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count))
+            logging.info(str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+" at:"+str(datetime.datetime.now()))
+            time.sleep(2)   
             friendcount+=1
         #for iterate friends
     except Exception as e:
@@ -129,6 +131,8 @@ else:
 #for - retry
 
 print("Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
+logging.info("Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
+            
 exit()
 
 deinit() #stop coloured output
