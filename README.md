@@ -51,8 +51,8 @@ Windows: just install Python 3.9 from the Windows Store.
 
 3. Create a project, development app and obtain Twitter keys (from your twitter development account) at https://developer.twitter.com/en/portal/dashboard
 4. Upgrade your Twitter developer account to the 'Elevated' account (free)
-5. Put your twitter keys to 'tweetconfig.txt'  
-6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column
+5. Copy/paste your twitter keys in 'tweetconfig.txt'  
+6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', Column B, each tweet to separate row
 7. Run it:
     ```bash
     python xls2tw.py
