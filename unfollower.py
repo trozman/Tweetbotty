@@ -121,7 +121,7 @@ for attempt in range(100): #retry if hit limit
             time.sleep(16*60) #wait for 16 mins to overcome the rate limit
             print("Waiting done, continuing..." +" at:"+str(datetime.datetime.now()))
     else:
-        print("Attempt to unfollow was successful, continuing after 6 secs...")
+        print(Fore.GREEN+"Unfollow process was successful...")
         time.sleep(6)
         break
 else:
@@ -130,7 +130,7 @@ else:
     exit()
 #for - retry
 
-print("Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
+print(Fore.BLUE+"Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
 logging.info("Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
             
 exit()
