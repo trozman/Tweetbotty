@@ -13,6 +13,41 @@ import tweepy
 import datetime
 import time
 import logging
+import sys,getopt
+
+#filter for unfollow:
+filter_followers=100
+filter_tweets=400
+
+#read CLI arguments t and f
+#if __name__ == "__main__":
+#    print(f"Arguments count: {len(sys.argv)}")
+#    for i, arg in enumerate(sys.argv):
+#        print(f"Argument {i:>6}: {arg}")
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:],"ht:f:")
+    #print("Opts:"+str(opts))
+    #print("Args:"+str(args))
+except getopt.GetoptError:
+    print('unfollower.py -t <number of tweets to filter> -f <number of followers to filter>')
+    sys.exit(2)
+for opt, arg in opts:
+    
+    if opt == '-h':
+        print("Usage:")
+        print('unfollower.py -t <number of tweets to filter> -f <number of followers to filter>')
+        sys.exit()
+    elif opt in ['-t']:
+        #print(arg)
+        filter_tweets = arg
+    elif opt in ['-f']:
+        #print(arg)
+        filter_followers = arg
+print("This program will unfollow all accounts that match the following filter:")
+print('Filter # of tweets is', filter_tweets)
+print('Filter # of followers is', filter_followers)
+print("*****************")
 
 #read twitter keys from the config file (tweerconfig.txt)
 print("Reading config file with twitter keys...")
@@ -67,8 +102,8 @@ init() #init colorama for coloured text
 no_of_unfollows=0
 
 #filter for unfollow:
-filter_followers=70
-filter_tweets=300
+filter_followers=100
+filter_tweets=400
 
 print("Getting friend list ...")
 friends=[]
@@ -109,7 +144,7 @@ for attempt in range(100): #retry if hit limit
 
             else:
                 print(Fore.WHITE)
-            print(str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count))
+            print(Fore.GREEN+"OK:"+Fore.WHITE+str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count))
             logging.info(str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+" at:"+str(datetime.datetime.now()))
             time.sleep(2)   
             friendcount+=1
