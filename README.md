@@ -1,5 +1,5 @@
 # Tweetbotty
-Twitter bots written in Python which use Excel file as a source for tweets/search keywords. I wrote them because I'm too lazy to regularly post to Twitter and follow people. Bots try to avoid Twitter limits and in most cases they succeed.
+Twitter bots are written in Python and use Excel file as a source for tweets/search keywords. I wrote them because I'm too lazy to regularly post to Twitter and follow people. Bots try to avoid Twitter limits and in most cases they succeed.
 The project is very fresh, made with 'a duct tape and a chewing gum', so use it at your own risk and most certainly, do not use it as a good programming practice.
 See 3 bots in action: 
 - Upper left - an unfollower bot (unfollows people with tweets&followers<threshold, 
