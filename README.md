@@ -95,7 +95,8 @@ The same as previous. Changes:
 Step 6: Define filters, modify variables filter_followers and filter_tweets
 
 Step 7: Run it:
+You can specify a filter which account to unfollow: -t <number of tweets> and -f <number of followers>
 
 ```bash
-python unfollower.py
+python unfollower.py -t 500 -f 150
 ```
