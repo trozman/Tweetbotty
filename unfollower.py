@@ -119,42 +119,42 @@ try:
     friends=tweepy.Cursor(TweetAPI.get_friends).items()
 
 except Exception as e:
-        print("Error getting friends:")
+        print(Fore.RED+"Error getting friends:")
         print(e)
         exit
 print("Iterating through friend list...")
 for attempt in range(100): #retry if hit limit
     try:
 
-        for f in friends:
+        for f in friends: #iterate through all friends
             if f.followers_count<filter_followers or f.statuses_count<filter_tweets: #filters defined above
-                print(Fore.RED)
+                
                 #unfollow
-                print("Unfollowing "+ f.screen_name+" at:"+str(datetime.datetime.now()))
+                print(Fore.RED+"Unfollowing "+ f.screen_name+" at:"+str(datetime.datetime.now()))
                 logging.info("Unfollowing "+ f.screen_name+" at:"+str(datetime.datetime.now()))
                 try:
                     TweetAPI.destroy_friendship(screen_name=f.screen_name)
                     no_of_unfollows+=1
                 except Exception as e:
-                    print("Error unfollowing:")
+                    print(Fore.RED+"Error unfollowing:")
                     print(e)
                 else:
-                    print("Unfollow ok!")
+                    print(Fore.BLUE+"Unfollow ok!")
                     time.sleep(5)
 
             else:
                 print(Fore.WHITE)
             print(Fore.GREEN+"OK:"+Fore.WHITE+str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count))
-            logging.info(str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+" at:"+str(datetime.datetime.now()))
+            logging.info(str("OK:"+friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+" at:"+str(datetime.datetime.now()))
             time.sleep(2)   
             friendcount+=1
         #for iterate friends
     except Exception as e:
-            print("Error getting friends, now waiting for 16 mins. Attempt "+str(attempt)+" at:"+str(datetime.datetime.now()))
+            print(Fore.RED+"Error getting friends, now waiting for 16 mins. Attempt "+str(attempt)+" at:"+str(datetime.datetime.now()))
             print(e)
             #exit()
             time.sleep(16*60) #wait for 16 mins to overcome the rate limit
-            print("Waiting done, continuing..." +" at:"+str(datetime.datetime.now()))
+            print(Fore.BLUE+"Waiting done, continuing..." +" at:"+str(datetime.datetime.now()))
     else:
         print(Fore.GREEN+"Unfollow process was successful...")
         time.sleep(6)
@@ -167,7 +167,7 @@ else:
 
 print(Fore.BLUE+"Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
 logging.info("Unfollowed:"+str(no_of_unfollows)+" at:"+str(datetime.datetime.now()))
-            
+
+deinit() #stop coloured output          
 exit()
 
-deinit() #stop coloured output
