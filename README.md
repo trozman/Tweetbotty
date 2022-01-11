@@ -26,6 +26,8 @@ sudo apt install python3.9
 ```
 You will also need pip3.9. Check https://stackoverflow.com/questions/65644782/how-to-install-pip-for-python-3-9-on-ubuntu-20-04
 
+**(or better, use venv)**
+
 Windows: just install Python 3.9 from the Windows Store.
 
 ### Installation: xls2tw.py (A bot that tweets)
