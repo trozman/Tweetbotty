@@ -21,6 +21,7 @@ import tweepy
 import datetime
 import time
 import logging
+import random
 
 
 def find_cursor(ws):
@@ -176,11 +177,16 @@ while True:
                 
             exit()
 
-        print(Fore.WHITE+"Waiting for 12 hours until next tweet...")  
-        logging.info("Waiting for 12 hours until next tweet..."+" at:"+str(datetime.datetime.now()))
+        waittime=12*60*60
+        timeoffset=random.randint(-1000,1000) #add some random minutes
+        print(f'Rand. time offset={timeoffset} mins')
+        waittime=waittime+timeoffset
+        
+        print(Fore.WHITE+f'Waiting for {waittime/60} mins until next tweet...')  
+        logging.info(f'Waiting for {waittime/60} mins until next tweet...'+" at:"+str(datetime.datetime.now()))
              
        
-        time.sleep(12*60*60) #sleep for 12 hrs - does not work if computer goes to standby - ensure it's always on
+        time.sleep(waittime) #sleep for 12 hrs +-100mins - does not work if computer goes to standby - ensure it's always on
         #time.sleep(5) #uncomment for testing purposes, if you want quicker turnaround
 
         now=datetime.datetime.now()
