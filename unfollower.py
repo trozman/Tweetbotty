@@ -40,10 +40,10 @@ for opt, arg in opts:
         sys.exit()
     elif opt in ['-t']:
         #print(arg)
-        filter_tweets = arg
+        filter_tweets = int(arg)
     elif opt in ['-f']:
         #print(arg)
-        filter_followers = arg
+        filter_followers = int(arg)
 print("This program will unfollow all accounts that match the following filter:")
 print('Filter # of tweets is', filter_tweets)
 print('Filter # of followers is', filter_followers)
@@ -102,8 +102,8 @@ init() #init colorama for coloured text
 no_of_unfollows=0
 
 #filter for unfollow:
-filter_followers=100
-filter_tweets=400
+#filter_followers=100
+#filter_tweets=400
 
 print("Getting friend list ...")
 friends=[]
@@ -127,6 +127,8 @@ for attempt in range(100): #retry if hit limit
     try:
 
         for f in friends: #iterate through all friends
+            print("Followers filter true? "+str(f.followers_count)+"<"+str(filter_followers)+" "+str(f.followers_count<filter_followers))
+            print("Tweets filter true? "+str(f.statuses_count)+"<"+str(filter_tweets)+" "+str(f.statuses_count<filter_tweets))
             if f.followers_count<filter_followers or f.statuses_count<filter_tweets: #filters defined above
                 
                 #unfollow
@@ -142,12 +144,12 @@ for attempt in range(100): #retry if hit limit
                     print(Fore.BLUE+"Unfollow ok!")
                     time.sleep(5)
 
-            else:
-                print(Fore.WHITE)
-            print(Fore.GREEN+"OK:"+Fore.WHITE+str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count))
-            logging.info(str("OK:"+friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+" at:"+str(datetime.datetime.now()))
-            time.sleep(2)   
-            friendcount+=1
+            else: #does not match filter - just print out user
+                #print(Fore.WHITE)
+                print(Fore.GREEN+"OK:"+Fore.WHITE+str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+", lang:"+str(f.lang)+", UTC offset:"+str(f.utc_offset))
+                logging.info("OK:"+str(friendcount)+" "+ f.screen_name+", location: "+f.location+", followers:"+str(f.followers_count)+", tweets:"+str(f.statuses_count)+" at:"+str(datetime.datetime.now()))
+                time.sleep(2)   
+                friendcount+=1
         #for iterate friends
     except Exception as e:
             print(Fore.RED+"Error getting friends, now waiting for 16 mins. Attempt "+str(attempt)+" at:"+str(datetime.datetime.now()))
