@@ -142,6 +142,7 @@ while True:
                 print("File does NOT exist!")            
                 TweetAPI.update_status(TweetText) #tweet only text
 
+            FileNamePic="tw_pics/" #reset the filename
             print(Fore.GREEN+"Posting to Twitter OK!"+" at:"+str(datetime.datetime.now())+Fore.WHITE)
             logging.info("Posting to TW ok"+" at:"+str(datetime.datetime.now()))
             #store cursor location to excel     
