@@ -2,15 +2,18 @@
 #   by Tomislav Rozman
 #   Usage:
 #   1. Put your twitter keys to 'tweetconfig.txt'  
-#   2. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column
-#   3. Run the program: 'python xls2tw.py'
-#   4. This tweetbot will run forewer: it will read tweets in sequence from excel tile, 
+#   2. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', B Column 
+#   3. Add some images to folder /tw_pics and their filenames in F column and 
+#   4. Run the program: 'python xls2tw.py'
+#   5. This tweetbot will run forewer: it will read tweets and pictures in sequence from excel tile, 
 #   publish it to Twitter, pausing for X hours. If it finds the empty row in the 
 #   spreadsheet(no more tweets), it will start from the beginning. You can add rows 
 #   with tweets while this script is running.
 #   If you interrupt it (ctrl-c) and re-run it, it will start from the last published tweet.
 #
 
+from distutils.command.upload import upload
+from msilib.schema import File
 from openpyxl import load_workbook
 from openpyxl.styles.styleable import NumberFormatDescriptor
 
@@ -22,6 +25,7 @@ import datetime
 import time
 import logging
 import random
+import os.path
 
 
 def find_cursor(ws):
@@ -77,6 +81,8 @@ init() #init colorama for coloured text
 XLSfilename="Tweets.xlsx"
 Worksheetname="Tweets"
 
+FileNamePic="tw_pics/"
+
 print(Fore.WHITE+"Opening "+XLSfilename+" and searching for cursor (last twitted row)...")
  
 wb = load_workbook(filename = XLSfilename)
@@ -125,7 +131,17 @@ while True:
         tweet_time=datetime.datetime.now()
         print(Fore.BLUE+"Tweeting #"+str(RowCursor)+":"+Fore.WHITE+TweetText+" /at "+str(tweet_time)+Fore.WHITE)
         try:
-            TweetAPI.update_status(TweetText) #tweet
+            #get the name of the image file
+            FileNamePic+=str(ws.cell(RowCursor,6).value)
+            print("Pic filename is:"+str(FileNamePic))
+            if(os.path.exists(FileNamePic)): #check if media file exists
+                media=TweetAPI.media_upload(FileNamePic)
+                print("File exists!")            
+                TweetAPI.update_status(TweetText, media_ids=[media.media_id]) #tweet text+image
+            else: #if there is no file, tweet only text
+                print("File does NOT exist!")            
+                TweetAPI.update_status(TweetText) #tweet only text
+
             print(Fore.GREEN+"Posting to Twitter OK!"+" at:"+str(datetime.datetime.now())+Fore.WHITE)
             logging.info("Posting to TW ok"+" at:"+str(datetime.datetime.now()))
             #store cursor location to excel     
