@@ -55,12 +55,13 @@ Windows: just install Python 3.9 from the Windows Store.
 4. Upgrade your Twitter developer account to the 'Elevated' account (free)
 5. Copy/paste your twitter keys in 'tweetconfig.txt'  
 6. Put some tweets to 'Tweets.xlsx', worksheet 'Tweets', Column B, each tweet to separate row
-7. Run it:
+7. Optional: Put some images to /tw_pics subfolder, add references to image names (e. g. Image01.jpg) to Tweets.xslx Column F
+8. Run it:
     ```bash
     python xls2tw.py
     ```
     
-8.  This tweetbot will run forewer: it will read tweets in sequence from excel tile, 
+8.  This tweetbot will run forewer: it will read tweets and images (if exist) in sequence from excel tile, 
 publish it to Twitter, pausing for X hours. If it finds the empty row in the 
 spreadsheet(no more tweets), it will start from the beginning. You can add rows 
 with tweets while this script is running.
